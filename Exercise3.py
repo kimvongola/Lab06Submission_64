@@ -55,9 +55,9 @@ input_box2 = InputBox(100, 200, 140, 32) # สร้าง InputBox2
 input_box4 = InputBox(100, 300, 140, 32)
 input_boxes = [input_box1, input_box2, input_box3, input_box4] # เก็บ InputBox ไว้ใน list เพื่อที่จะสามารถนำไปเรียกใช้ได้ง่าย
 run = True
-screen.fill((255, 255, 255))
+switch=0
 while run:
-    
+    screen.fill((255, 255, 255))
     for box in input_boxes: # ทำการเรียก InputBox ทุกๆตัว โดยการ Loop เข้าไปยัง list ที่เราเก็บค่า InputBox ไว้
         box.update() # เรียกใช้ฟังก์ชัน update() ของ InputBox
         box.draw(screen) # เรียกใช้ฟังก์ชัน draw() ของ InputBox เพื่อทำการสร้างรูปบน Screen
@@ -66,41 +66,43 @@ while run:
     textRect1 = text1.get_rect() # text size
     textRect1.center = (144, 90)    
     screen.blit(text1, textRect1)
-    # font = pg.font.Font('freesansbold.ttf', 16) # font and fontsize
-    # text3 = font.render('Last Name', True, (0,0,0), (255,255,255)) # (text,is smooth?,letter color,background color)
-    # textRect3 = text3.get_rect() # text size
-    # textRect3.center = (395, 90)
-    # screen.blit(text3, textRect3)
-    # font = pg.font.Font('freesansbold.ttf', 16) # font and fontsize
-    # text2 = font.render('Age', True, (0,0,0), (255,255,255)) # (text,is smooth?,letter color,background color)
-    # textRect2 = text2.get_rect() # text size
-    # textRect2.center = (120, 190)        
-    # screen.blit(text2, textRect2)
-    # font = pg.font.Font('freesansbold.ttf', 16) # font and fontsize
-    # text4 = font.render('Submit', True, (0,0,0), (255,255,255)) # (text,is smooth?,letter color,background color)
-    # textRect4 = text4.get_rect() # text size
-    # textRect4.center = (195, 315)        
-    # screen.blit(text4, textRect4)
+    font = pg.font.Font('freesansbold.ttf', 16) # font and fontsize
+    text3 = font.render('Last Name', True, (0,0,0), (255,255,255)) # (text,is smooth?,letter color,background color)
+    textRect3 = text3.get_rect() # text size
+    textRect3.center = (395, 90)
+    screen.blit(text3, textRect3)
+    font = pg.font.Font('freesansbold.ttf', 16) # font and fontsize
+    text2 = font.render('Age', True, (0,0,0), (255,255,255)) # (text,is smooth?,letter color,background color)
+    textRect2 = text2.get_rect() # text size
+    textRect2.center = (120, 190)        
+    screen.blit(text2, textRect2)
+    font = pg.font.Font('freesansbold.ttf', 16) # font and fontsize
+    text4 = font.render('Submit', True, (0,0,0), (255,255,255)) # (text,is smooth?,letter color,background color)
+    textRect4 = text4.get_rect() # text size
+    textRect4.center = (195, 315)        
+    screen.blit(text4, textRect4)
     for event in pg.event.get():
         
         for box in input_boxes:
             box.handle_event(event)
         
-            # if event.type == pg.MOUSEBUTTONDOWN:
-            #     if textRect4.collidepoint(event.pos):
-            #         one=input_box1.show().isdigit()
-            #         three=input_box3.show().isdigit()
-            #         if input_box2.show().isdigit() and one==False and three==False:
-            #             text5 = font.render('Hello '+input_box1.show()+" "+input_box3.show()+" !"+" You are "+input_box2.show()+" years old.", True, (0,0,0), (255,255,255))
-            #             textRect5 = text5.get_rect() # text size
-            #             textRect5.center = (300, 400)        
-            #             screen.blit(text5, textRect5)
-                        
-            #         else:
-            #             text5 = font.render('ERROR', True, (0,0,0), (255,255,255))
-            #             textRect5 = text5.get_rect() # text size
-            #             textRect5.center = (300, 400)        
-            #             screen.blit(text5, textRect5)
+        if event.type == pg.MOUSEBUTTONDOWN:
+            if textRect4.collidepoint(event.pos):
+                one=input_box1.show().isdigit()
+                three=input_box3.show().isdigit()
+                switch=1
+    if switch==1:
+        if input_box2.show().isdigit() and one==False and three==False:
+            text5 = font.render('Hello '+input_box1.show()+" "+input_box3.show()+" !"+" You are "+input_box2.show()+" years old.", True, (0,0,0), (255,255,255))
+            textRect5 = text5.get_rect() # text size
+            textRect5.center = (300, 400)        
+            screen.blit(text5, textRect5)
+            
+        else:
+            text5 = font.render('ERROR', True, (0,0,0), (255,255,255))
+            textRect5 = text5.get_rect() # text size
+            textRect5.center = (300, 400)        
+            screen.blit(text5, textRect5)
                         
         if event.type == pg.QUIT:
             pg.quit()
